@@ -47,6 +47,22 @@
   .scroll-reveal { opacity: 1 !important; transform: none !important; }
 }
 </style>
+<style>.reels{padding-block:30px 96px;overflow:hidden}
+.reels .section-top em{color:#a5adbe}
+.reels-toolbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:30px;padding:14px 0;border-top:1px solid var(--line);color:var(--muted)}
+.reels-controls{display:flex;align-items:center;gap:10px}
+#reels-position{min-width:60px;color:var(--ink);text-align:right;margin-right:12px}
+.reels-controls button{width:43px;height:43px;display:grid;place-items:center;border:1px solid #656975;border-radius:50%;background:transparent;color:var(--ink);font-size:1.4rem;transition:background .2s,border-color .2s,transform .2s}
+.reels-controls button:hover:not(:disabled){background:var(--blue);border-color:var(--blue);transform:scale(1.06)}
+.reels-controls button:disabled{opacity:.35;cursor:default}
+.reels-track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:0;scrollbar-width:thin;scrollbar-color:#636978 transparent;overscroll-behavior-inline:contain;padding:5px 0 18px}
+.reel-card{flex:0 0 clamp(280px,31vw,390px);min-width:0;scroll-snap-align:start;background:#14171e;border:1px solid #3b3f49;border-radius:3px;overflow:hidden}
+.reel-top{display:flex;justify-content:space-between;gap:12px;padding:12px 14px;color:#aeb7d1;border-bottom:1px solid #3b3f49}
+.reel-card iframe{display:block;width:100%;height:520px;border:0;background:#fff}
+.reel-card>a{display:flex;justify-content:space-between;gap:16px;padding:14px;color:var(--ink);font-size:.875rem;border-top:1px solid #3b3f49;transition:color .2s}
+.reel-card>a:hover{color:#9cacff}
+@media(max-width:640px){.reels{padding-block:8px 60px}.reels-toolbar{margin-top:22px}.reels-toolbar>span{font-size:.65rem}.reels-track{gap:14px}.reel-card{flex-basis:min(82vw,340px)}.reel-card iframe{height:490px}}
+</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -77,7 +93,18 @@
 <div class="empty-state" hidden><h3>The everyday moments live on Instagram.</h3><p>This selection is all about cars. Find the rest of my visual diary on the feed.</p><a href="https://www.instagram.com/v1gn3shh/" target="_blank" rel="noopener noreferrer">Explore @v1gn3shh ↗</a></div>
 <a class="feed-link" href="https://www.instagram.com/v1gn3shh/" target="_blank" rel="noopener noreferrer">More on the feed <span aria-hidden="true">↗</span></a>
 </section>
-<section class="about wrap" id="about" aria-labelledby="about-title"><div class="about-heading"><span class="section-index mono">02 / BEHIND THE FRAMES</span><h2 id="about-title">Hey, I'm<br><em>Vignesh.</em></h2></div><div class="about-copy"><p>Usually pointing a camera at a car.<br>Sometimes at everything else.</p><p class="muted">Based in Dubai. Here for the details, the unexpected light, and the everyday moments worth keeping.</p><dl><div><dt>BASED IN</dt><dd>Dubai, UAE</dd></div><div><dt>IN THE FRAME</dt><dd>Cars + everyday life</dd></div><div><dt>FIND ME</dt><dd><a href="https://www.instagram.com/v1gn3shh/" target="_blank" rel="noopener noreferrer">@v1gn3shh ↗</a></dd></div></dl></div></section>
+<section class="reels wrap" id="reels" aria-labelledby="reels-title">
+<div class="section-top"><div><span class="section-index mono">02 / IN MOTION</span><h2 id="reels-title">Moving <em>frames.</em></h2></div><p>A few moments that needed more than a still.</p></div>
+<div class="reels-toolbar"><span class="mono">PRESS PLAY / SWIPE THROUGH</span><div class="reels-controls"><span class="mono" id="reels-position" aria-live="polite">01 / 05</span><button type="button" id="reels-prev" aria-label="Previous reel">←</button><button type="button" id="reels-next" aria-label="Next reel">→</button></div></div>
+<div class="reels-track" id="reels-track" role="region" aria-label="Instagram reel carousel" tabindex="0">
+<article class="reel-card"><div class="reel-top mono"><span>01 / 05</span><span>VIGNESH IN MOTION</span></div><iframe title="Instagram reel 1 by Vignesh" src="https://www.instagram.com/reel/Dac87R5M6iP/embed/" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe><a href="https://www.instagram.com/reel/Dac87R5M6iP/" target="_blank" rel="noopener noreferrer">Watch on Instagram <span aria-hidden="true">↗</span></a></article>
+<article class="reel-card"><div class="reel-top mono"><span>02 / 05</span><span>VIGNESH IN MOTION</span></div><iframe title="Instagram reel 2 by Vignesh" src="https://www.instagram.com/reel/DbKuDuqMO1Z/embed/" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe><a href="https://www.instagram.com/reel/DbKuDuqMO1Z/" target="_blank" rel="noopener noreferrer">Watch on Instagram <span aria-hidden="true">↗</span></a></article>
+<article class="reel-card"><div class="reel-top mono"><span>03 / 05</span><span>VIGNESH IN MOTION</span></div><iframe title="Instagram reel 3 by Vignesh" src="https://www.instagram.com/reel/Dawz0fHsmrh/embed/" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe><a href="https://www.instagram.com/reel/Dawz0fHsmrh/" target="_blank" rel="noopener noreferrer">Watch on Instagram <span aria-hidden="true">↗</span></a></article>
+<article class="reel-card"><div class="reel-top mono"><span>04 / 05</span><span>VIGNESH IN MOTION</span></div><iframe title="Instagram reel 4 by Vignesh" src="https://www.instagram.com/reel/DcLxGyXsqAt/embed/" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe><a href="https://www.instagram.com/reel/DcLxGyXsqAt/" target="_blank" rel="noopener noreferrer">Watch on Instagram <span aria-hidden="true">↗</span></a></article>
+<article class="reel-card"><div class="reel-top mono"><span>05 / 05</span><span>VIGNESH IN MOTION</span></div><iframe title="Instagram reel 5 by Vignesh" src="https://www.instagram.com/reel/DdwO2kAsIbg/embed/" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe><a href="https://www.instagram.com/reel/DdwO2kAsIbg/" target="_blank" rel="noopener noreferrer">Watch on Instagram <span aria-hidden="true">↗</span></a></article>
+</div>
+</section>
+<section class="about wrap" id="about" aria-labelledby="about-title"><div class="about-heading"><span class="section-index mono">03 / BEHIND THE FRAMES</span><h2 id="about-title">Hey, I'm<br><em>Vignesh.</em></h2></div><div class="about-copy"><p>Usually pointing a camera at a car.<br>Sometimes at everything else.</p><p class="muted">Based in Dubai. Here for the details, the unexpected light, and the everyday moments worth keeping.</p><dl><div><dt>BASED IN</dt><dd>Dubai, UAE</dd></div><div><dt>IN THE FRAME</dt><dd>Cars + everyday life</dd></div><div><dt>FIND ME</dt><dd><a href="https://www.instagram.com/v1gn3shh/" target="_blank" rel="noopener noreferrer">@v1gn3shh ↗</a></dd></div></dl></div></section>
 <section class="connect" aria-label="Follow on Instagram"><div class="wrap connect-inner"><div><span class="mono">THE DIARY CONTINUES.</span><h2>See you on<br><em>the feed.</em></h2></div><a class="follow" href="https://www.instagram.com/v1gn3shh/" target="_blank" rel="noopener noreferrer">Follow @v1gn3shh <span aria-hidden="true">↗</span></a></div></section>
 </main>
 <footer class="wrap footer"><span>© <span id="year">2026</span> Vignesh</span><span class="mono">SEEN THROUGH MY EYES.</span><a href="#">Back to top ↑</a></footer>
@@ -99,12 +126,39 @@ buttons.forEach(button => button.addEventListener('click', () => {
 }));
 document.getElementById('year').textContent = new Date().getFullYear();
 
+const reelsTrack = document.getElementById('reels-track');
+const reelCards = Array.from(reelsTrack.querySelectorAll('.reel-card'));
+const reelsPosition = document.getElementById('reels-position');
+const reelsPrev = document.getElementById('reels-prev');
+const reelsNext = document.getElementById('reels-next');
+let activeReel = 0;
+const updateReels = () => {
+  const left = reelsTrack.scrollLeft;
+  activeReel = reelCards.reduce((closest, card, index) =>
+    Math.abs(card.offsetLeft - reelCards[0].offsetLeft - left) <
+    Math.abs(reelCards[closest].offsetLeft - reelCards[0].offsetLeft - left) ? index : closest, 0);
+  reelsPosition.textContent = `${String(activeReel + 1).padStart(2, '0')} / ${String(reelCards.length).padStart(2, '0')}`;
+  reelsPrev.disabled = activeReel === 0;
+  reelsNext.disabled = activeReel === reelCards.length - 1;
+};
+const moveReel = direction => {
+  const next = Math.max(0, Math.min(reelCards.length - 1, activeReel + direction));
+  reelsTrack.scrollTo({ left: reelCards[next].offsetLeft - reelCards[0].offsetLeft, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+  activeReel = next;
+  updateReels();
+};
+reelsPrev.addEventListener('click', () => moveReel(-1));
+reelsNext.addEventListener('click', () => moveReel(1));
+reelsTrack.addEventListener('scroll', () => requestAnimationFrame(updateReels), { passive: true });
+window.addEventListener('resize', updateReels);
+updateReels();
+
 // Progressive enhancement: content stays visible without JavaScript or motion support.
 const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
 if ('IntersectionObserver' in window && !motionPreference.matches) {
   const targets = document.querySelectorAll(
     '.eyebrow, .title-line, .intro-bottom, .hero-photo, .photo-foot, ' +
-    '.section-top, .work-toolbar, .shot, .feed-link, .about-heading, ' +
+    '.section-top, .work-toolbar, .shot, .feed-link, .reels-toolbar, .reel-card, .about-heading, ' +
     '.about-copy > p, .about-copy dl, .connect-inner > div, .follow, .footer'
   );
   const reveal = element => {
