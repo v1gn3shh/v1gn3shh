@@ -55,13 +55,18 @@
 .reels-controls button{width:43px;height:43px;display:grid;place-items:center;border:1px solid #656975;border-radius:50%;background:transparent;color:var(--ink);font-size:1.4rem;transition:background .2s,border-color .2s,transform .2s}
 .reels-controls button:hover:not(:disabled){background:var(--blue);border-color:var(--blue);transform:scale(1.06)}
 .reels-controls button:disabled{opacity:.35;cursor:default}
-.reels-track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:0;scrollbar-width:thin;scrollbar-color:#636978 transparent;overscroll-behavior-inline:contain;padding:5px 0 18px}
+.reels-track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:0;scrollbar-width:none;overscroll-behavior-inline:contain;padding:5px 0 18px}
+.reels-track::-webkit-scrollbar{display:none}
 .reel-card{flex:0 0 clamp(280px,31vw,390px);min-width:0;scroll-snap-align:start;background:#14171e;border:1px solid #3b3f49;border-radius:3px;overflow:hidden}
 .reel-top{display:flex;justify-content:space-between;gap:12px;padding:12px 14px;color:#aeb7d1;border-bottom:1px solid #3b3f49}
-.reel-card iframe{display:block;width:100%;height:520px;border:0;background:#fff}
+.reel-player{position:relative;width:100%;aspect-ratio:9/16;background:#050607;overflow:hidden}
+.reel-player video{display:block;width:100%;height:100%;object-fit:contain;background:#050607}
+.reel-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:74px;height:74px;border:1px solid #ffffffb3;border-radius:50%;background:#0b0e18ae;backdrop-filter:blur(10px);color:white;font-size:1.55rem;padding-left:6px;display:grid;place-items:center;box-shadow:0 8px 30px #0009;transition:background .2s,scale .2s}
+.reel-play:hover{background:var(--blue);scale:1.07}
+.reel-player.is-playing .reel-play{display:none}
 .reel-card>a{display:flex;justify-content:space-between;gap:16px;padding:14px;color:var(--ink);font-size:.875rem;border-top:1px solid #3b3f49;transition:color .2s}
 .reel-card>a:hover{color:#9cacff}
-@media(max-width:640px){.reels{padding-block:8px 60px}.reels-toolbar{margin-top:22px}.reels-toolbar>span{font-size:.65rem}.reels-track{gap:14px}.reel-card{flex-basis:min(82vw,340px)}.reel-card iframe{height:490px}}
+@media(max-width:640px){.reels{padding-block:8px 60px}.reels-toolbar{margin-top:22px}.reels-toolbar>span{font-size:.65rem}.reels-track{gap:14px}.reel-card{flex-basis:min(82vw,340px)}}
 </style>
 </head>
 <body>
@@ -97,11 +102,11 @@
 <div class="section-top"><div><span class="section-index mono">02 / IN MOTION</span><h2 id="reels-title">Moving <em>frames.</em></h2></div><p>A few moments that needed more than a still.</p></div>
 <div class="reels-toolbar"><span class="mono">PRESS PLAY / SWIPE THROUGH</span><div class="reels-controls"><span class="mono" id="reels-position" aria-live="polite">01 / 05</span><button type="button" id="reels-prev" aria-label="Previous reel">←</button><button type="button" id="reels-next" aria-label="Next reel">→</button></div></div>
 <div class="reels-track" id="reels-track" role="region" aria-label="Instagram reel carousel" tabindex="0">
-<article class="reel-card"><div class="reel-top mono"><span>01 / 05</span><span>VIGNESH IN MOTION</span></div><iframe title="Instagram reel 1 by Vignesh" src="https://www.instagram.com/reel/Dac87R5M6iP/embed/" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe><a href="https://www.instagram.com/reel/Dac87R5M6iP/" target="_blank" rel="noopener noreferrer">Watch on Instagram <span aria-hidden="true">↗</span></a></article>
-<article class="reel-card"><div class="reel-top mono"><span>02 / 05</span><span>VIGNESH IN MOTION</span></div><iframe title="Instagram reel 2 by Vignesh" src="https://www.instagram.com/reel/DbKuDuqMO1Z/embed/" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe><a href="https://www.instagram.com/reel/DbKuDuqMO1Z/" target="_blank" rel="noopener noreferrer">Watch on Instagram <span aria-hidden="true">↗</span></a></article>
-<article class="reel-card"><div class="reel-top mono"><span>03 / 05</span><span>VIGNESH IN MOTION</span></div><iframe title="Instagram reel 3 by Vignesh" src="https://www.instagram.com/reel/Dawz0fHsmrh/embed/" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe><a href="https://www.instagram.com/reel/Dawz0fHsmrh/" target="_blank" rel="noopener noreferrer">Watch on Instagram <span aria-hidden="true">↗</span></a></article>
-<article class="reel-card"><div class="reel-top mono"><span>04 / 05</span><span>VIGNESH IN MOTION</span></div><iframe title="Instagram reel 4 by Vignesh" src="https://www.instagram.com/reel/DcLxGyXsqAt/embed/" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe><a href="https://www.instagram.com/reel/DcLxGyXsqAt/" target="_blank" rel="noopener noreferrer">Watch on Instagram <span aria-hidden="true">↗</span></a></article>
-<article class="reel-card"><div class="reel-top mono"><span>05 / 05</span><span>VIGNESH IN MOTION</span></div><iframe title="Instagram reel 5 by Vignesh" src="https://www.instagram.com/reel/DdwO2kAsIbg/embed/" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe><a href="https://www.instagram.com/reel/DdwO2kAsIbg/" target="_blank" rel="noopener noreferrer">Watch on Instagram <span aria-hidden="true">↗</span></a></article>
+<article class="reel-card"><div class="reel-top mono"><span>01 / 05</span><span>VIGNESH IN MOTION</span></div><div class="reel-player"><video controls playsinline preload="none" poster="assets/reel-01-poster.jpg" aria-label="Play Vignesh reel 1"><source src="assets/reel-01.mp4" type="video/mp4">Your browser does not support video playback.</video><button type="button" class="reel-play" aria-label="Play reel 1">▶</button></div><a href="https://www.instagram.com/reel/Dac87R5M6iP/" target="_blank" rel="noopener noreferrer">Original reel <span aria-hidden="true">↗</span></a></article>
+<article class="reel-card"><div class="reel-top mono"><span>02 / 05</span><span>VIGNESH IN MOTION</span></div><div class="reel-player"><video controls playsinline preload="none" poster="assets/reel-02-poster.jpg" aria-label="Play Vignesh reel 2"><source src="assets/reel-02.mp4" type="video/mp4">Your browser does not support video playback.</video><button type="button" class="reel-play" aria-label="Play reel 2">▶</button></div><a href="https://www.instagram.com/reel/DbKuDuqMO1Z/" target="_blank" rel="noopener noreferrer">Original reel <span aria-hidden="true">↗</span></a></article>
+<article class="reel-card"><div class="reel-top mono"><span>03 / 05</span><span>VIGNESH IN MOTION</span></div><div class="reel-player"><video controls playsinline preload="none" poster="assets/reel-03-poster.jpg" aria-label="Play Vignesh reel 3"><source src="assets/reel-03.mp4" type="video/mp4">Your browser does not support video playback.</video><button type="button" class="reel-play" aria-label="Play reel 3">▶</button></div><a href="https://www.instagram.com/reel/Dawz0fHsmrh/" target="_blank" rel="noopener noreferrer">Original reel <span aria-hidden="true">↗</span></a></article>
+<article class="reel-card"><div class="reel-top mono"><span>04 / 05</span><span>VIGNESH IN MOTION</span></div><div class="reel-player"><video controls playsinline preload="none" poster="assets/reel-04-poster.jpg" aria-label="Play Vignesh reel 4"><source src="assets/reel-04.mp4" type="video/mp4">Your browser does not support video playback.</video><button type="button" class="reel-play" aria-label="Play reel 4">▶</button></div><a href="https://www.instagram.com/reel/DcLxGyXsqAt/" target="_blank" rel="noopener noreferrer">Original reel <span aria-hidden="true">↗</span></a></article>
+<article class="reel-card"><div class="reel-top mono"><span>05 / 05</span><span>VIGNESH IN MOTION</span></div><div class="reel-player"><video controls playsinline preload="none" poster="assets/reel-05-poster.jpg" aria-label="Play Vignesh reel 5"><source src="assets/reel-05.mp4" type="video/mp4">Your browser does not support video playback.</video><button type="button" class="reel-play" aria-label="Play reel 5">▶</button></div><a href="https://www.instagram.com/reel/DdwO2kAsIbg/" target="_blank" rel="noopener noreferrer">Original reel <span aria-hidden="true">↗</span></a></article>
 </div>
 </section>
 <section class="about wrap" id="about" aria-labelledby="about-title"><div class="about-heading"><span class="section-index mono">03 / BEHIND THE FRAMES</span><h2 id="about-title">Hey, I'm<br><em>Vignesh.</em></h2></div><div class="about-copy"><p>Usually pointing a camera at a car.<br>Sometimes at everything else.</p><p class="muted">Based in Dubai. Here for the details, the unexpected light, and the everyday moments worth keeping.</p><dl><div><dt>BASED IN</dt><dd>Dubai, UAE</dd></div><div><dt>IN THE FRAME</dt><dd>Cars + everyday life</dd></div><div><dt>FIND ME</dt><dd><a href="https://www.instagram.com/v1gn3shh/" target="_blank" rel="noopener noreferrer">@v1gn3shh ↗</a></dd></div></dl></div></section>
@@ -131,6 +136,7 @@ const reelCards = Array.from(reelsTrack.querySelectorAll('.reel-card'));
 const reelsPosition = document.getElementById('reels-position');
 const reelsPrev = document.getElementById('reels-prev');
 const reelsNext = document.getElementById('reels-next');
+const reelVideos = reelCards.map(card => card.querySelector('video'));
 let activeReel = 0;
 const updateReels = () => {
   const left = reelsTrack.scrollLeft;
@@ -143,6 +149,7 @@ const updateReels = () => {
 };
 const moveReel = direction => {
   const next = Math.max(0, Math.min(reelCards.length - 1, activeReel + direction));
+  if (next !== activeReel) reelVideos.forEach(video => video.pause());
   reelsTrack.scrollTo({ left: reelCards[next].offsetLeft - reelCards[0].offsetLeft, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
   activeReel = next;
   updateReels();
@@ -152,6 +159,27 @@ reelsNext.addEventListener('click', () => moveReel(1));
 reelsTrack.addEventListener('scroll', () => requestAnimationFrame(updateReels), { passive: true });
 window.addEventListener('resize', updateReels);
 updateReels();
+reelCards.forEach((card, index) => {
+  const video = reelVideos[index];
+  const playButton = card.querySelector('.reel-play');
+  playButton.addEventListener('click', () => video.play());
+  video.addEventListener('play', () => {
+    reelVideos.forEach(other => { if (other !== video) other.pause(); });
+    card.querySelector('.reel-player').classList.add('is-playing');
+  });
+  for (const event of ['pause', 'ended']) {
+    video.addEventListener(event, () => card.querySelector('.reel-player').classList.remove('is-playing'));
+  }
+});
+if ('IntersectionObserver' in window) {
+  const videoVisibility = new IntersectionObserver(entries => {
+    entries.forEach(entry => { if (!entry.isIntersecting) reelVideos.forEach(video => video.pause()); });
+  }, { threshold: 0.05 });
+  videoVisibility.observe(document.getElementById('reels'));
+}
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) reelVideos.forEach(video => video.pause());
+});
 
 // Progressive enhancement: content stays visible without JavaScript or motion support.
 const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
