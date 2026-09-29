@@ -18,6 +18,35 @@
 
 .title-line{display:flex;align-items:center;gap:clamp(8px,2.5vw,36px)}.title-line .chrome{flex:0 0 auto}.motion-car{display:block;width:clamp(90px,29vw,390px);height:auto;min-width:0;flex:0 1 auto;pointer-events:none}@media(max-width:640px){.title-line{gap:8px}.motion-car{width:26vw}}
 </style>
+<style>/* Replaying scroll reveals; offscreen reset has a buffer to avoid edge flicker. */
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-reveal {
+    opacity: 0;
+    transform: translate3d(0, 48px, 0);
+    transition: opacity 1100ms cubic-bezier(.25, .46, .45, .94),
+                transform 1250ms cubic-bezier(.16, 1, .3, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  .scroll-reveal.reveal-photo {
+    transform: translate3d(0, 56px, 0) scale(.955);
+  }
+  .scroll-reveal.is-revealed {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  .scroll-reveal:focus-within {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  @media (max-width: 640px) {
+    .scroll-reveal { --reveal-delay: 0ms !important; }
+  }
+}
+@media print {
+  .scroll-reveal { opacity: 1 !important; transform: none !important; }
+}
+</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -69,6 +98,61 @@ buttons.forEach(button => button.addEventListener('click', () => {
   count.textContent = String(visible).padStart(2, '0') + ' FRAMES';
 }));
 document.getElementById('year').textContent = new Date().getFullYear();
+
+// Progressive enhancement: content stays visible without JavaScript or motion support.
+const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+if ('IntersectionObserver' in window && !motionPreference.matches) {
+  const targets = document.querySelectorAll(
+    '.eyebrow, .title-line, .intro-bottom, .hero-photo, .photo-foot, ' +
+    '.section-top, .work-toolbar, .shot, .feed-link, .about-heading, ' +
+    '.about-copy > p, .about-copy dl, .connect-inner > div, .follow, .footer'
+  );
+  const reveal = element => {
+    element.classList.add('is-revealed');
+  };
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) reveal(entry.target);
+    });
+  }, { threshold: 0, rootMargin: '0px 0px -8% 0px' });
+  // Rearm only once fully offscreen, with a buffer to prevent edge flicker.
+  const resetObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting && !entry.target.contains(document.activeElement)) {
+        entry.target.classList.remove('is-revealed');
+      }
+    });
+  }, { threshold: 0, rootMargin: '80px 0px 80px 0px' });
+  targets.forEach(element => {
+    element.classList.add('scroll-reveal');
+    if (element.classList.contains('hero-photo') || element.classList.contains('shot')) {
+      element.classList.add('reveal-photo');
+    }
+    if (element.classList.contains('shot')) {
+      element.style.setProperty('--reveal-delay', `${Array.from(shots).indexOf(element) * 110}ms`);
+    }
+  });
+  // Paint the starting state before observing elements already in the viewport.
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    if (motionPreference.matches) return;
+    targets.forEach(element => {
+      observer.observe(element);
+      resetObserver.observe(element);
+    });
+  }));
+  // Keyboard navigation must never focus an invisible control.
+  document.addEventListener('focusin', event => {
+    const element = event.target.closest('.scroll-reveal');
+    if (element) reveal(element);
+  });
+  motionPreference.addEventListener('change', event => {
+    if (event.matches) {
+      targets.forEach(element => element.classList.add('is-revealed'));
+      observer.disconnect();
+      resetObserver.disconnect();
+    }
+  });
+}
 
 </script>
 </body>
